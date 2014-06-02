@@ -1,9 +1,26 @@
-#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
-# This script installs to /usr/local only. To install elsewhere you can just
-# untar https://github.com/Homebrew/homebrew/tarball/master anywhere you like or
+#!/usr/bin/env ruby
+# This script installs only to /usr/local on Mac or ~/.linuxbrew on Linux.
+# To install elsewhere you can just untar
+# https://github.com/Homebrew/homebrew/tarball/master anywhere you like or
 # change the value of HOMEBREW_PREFIX.
-HOMEBREW_PREFIX = '/usr/local'
-HOMEBREW_CACHE = '/Library/Caches/Homebrew'
+
+def mac?
+  /darwin/i === RUBY_PLATFORM
+end
+
+def linux?
+  /linux/i === RUBY_PLATFORM
+end
+
+if linux?
+  HOMEBREW_PREFIX = "#{ENV['HOME']}/.linuxbrew"
+  HOMEBREW_CACHE = "#{ENV['HOME']}/.cache/Homebrew"
+  REPOSITORY="https://github.com/Homebrew/linuxbrew"
+else
+  HOMEBREW_PREFIX = "/usr/local"
+  HOMEBREW_CACHE = "/Library/Caches/Homebrew"
+  REPOSITORY="https://github.com/Homebrew/homebrew"
+end
 
 module Tty extend self
   def blue; bold 34; end
@@ -66,13 +83,14 @@ module Version
 end
 
 def macos_version
+  @macos_version ||= '10.8' if linux?
   @macos_version ||= `/usr/bin/sw_vers -productVersion`.chomp[/10\.\d+/].extend(Version)
 end
 
 def git
   @git ||= if ENV['GIT'] and File.executable? ENV['GIT']
     ENV['GIT']
-  elsif Kernel.system '/usr/bin/which -s git'
+  elsif Kernel.system '/usr/bin/which git >/dev/null'
     'git'
   else
     exe = `xcrun -find git 2>/dev/null`.chomp
@@ -98,7 +116,7 @@ Dir.chdir "/usr"
 ####################################################################### script
 abort "MacOS too old, see: https://github.com/mistydemeo/tigerbrew" if macos_version < "10.5"
 abort "Don't run this as root!" if Process.uid == 0
-abort <<-EOABORT unless `groups`.split.include? "admin"
+abort <<-EOABORT unless linux? || `groups`.split.include?("admin")
 This script requires the user #{ENV['USER']} to be an Administrator. If this
 sucks for you then you can install Homebrew in your home directory or however
 you please; please refer to our homepage. If you still want to use this script
@@ -143,7 +161,9 @@ end
 
 wait_for_user if STDIN.tty?
 
-if File.directory? HOMEBREW_PREFIX
+if linux?
+  system "/bin/mkdir", "-p", HOMEBREW_PREFIX
+elsif File.directory? HOMEBREW_PREFIX
   sudo "/bin/chmod", "g+rwx", *chmods unless chmods.empty?
   sudo "/usr/bin/chgrp", "admin", *chgrps unless chgrps.empty?
 else
@@ -153,8 +173,12 @@ else
   sudo "/usr/bin/chgrp", "admin", HOMEBREW_PREFIX
 end
 
-sudo "/bin/mkdir", HOMEBREW_CACHE unless File.directory? HOMEBREW_CACHE
-sudo "/bin/chmod", "g+rwx", HOMEBREW_CACHE
+if linux?
+  system "/bin/mkdir", "-p", HOMEBREW_CACHE
+else
+  sudo "/bin/mkdir", HOMEBREW_CACHE unless File.directory? HOMEBREW_CACHE
+  sudo "/bin/chmod", "g+rwx", HOMEBREW_CACHE
+end
 
 if macos_version >= "10.9"
   developer_dir = `/usr/bin/xcode-select -print-path 2>/dev/null`.chomp
@@ -171,7 +195,7 @@ Dir.chdir HOMEBREW_PREFIX do
   if git
     # we do it in four steps to avoid merge errors when reinstalling
     system git, "init", "-q"
-    system git, "remote", "add", "origin", "https://github.com/Homebrew/homebrew"
+    system git, "remote", "add", "origin", REPOSITORY
 
     args = git, "fetch", "origin", "master:refs/remotes/origin/master", "-n"
     args << "--depth=1" if ARGV.include? "--fast"
@@ -184,7 +208,7 @@ Dir.chdir HOMEBREW_PREFIX do
     # we use -k for curl because Leopard has a bunch of bad SSL certificates
     curl_flags = "fsSL"
     curl_flags << "k" if macos_version <= "10.5"
-    system "/bin/bash -o pipefail -c '/usr/bin/curl -#{curl_flags} https://github.com/Homebrew/homebrew/tarball/master | /usr/bin/tar xz -m --strip 1'"
+    system "/bin/bash -o pipefail -c '/usr/bin/curl -#{curl_flags} #{REPOSITORY}/tarball/master | tar xz -m --strip 1'"
   end
 end
 
@@ -196,7 +220,7 @@ ohai "Next steps"
 if macos_version < "10.9" and macos_version > "10.6"
   `/usr/bin/cc --version 2> /dev/null` =~ %r[clang-(\d{2,})]
   version = $1.to_i
-  puts "Install the #{Tty.white}Command Line Tools for Xcode#{Tty.reset}: https://developer.apple.com/downloads" if version < 425
+  puts "Install the #{Tty.white}Command Line Tools for Xcode#{Tty.reset}: https://developer.apple.com/downloads" if mac? && version < 425
 else
   puts "Install #{Tty.white}Xcode#{Tty.reset}: https://developer.apple.com/xcode" unless File.exist? "/usr/bin/cc"
 end

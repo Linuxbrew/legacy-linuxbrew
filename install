@@ -217,7 +217,20 @@ warn "#{HOMEBREW_PREFIX}/bin is not in your PATH." unless ENV['PATH'].split(':')
 ohai "Installation successful!"
 ohai "Next steps"
 
-if macos_version < "10.9" and macos_version > "10.6"
+if linux?
+  puts <<-EOS
+Install the Linuxbrew dependencies:
+
+#{Tty.white}Debian, Ubuntu, etc.:#{Tty.reset}
+  `sudo apt-get install build-essential`
+
+#{Tty.white}Fedora, Red Hat, CentOS, etc.:#{Tty.reset}
+  `sudo yum groupinstall 'Development Tools'`
+
+See http://brew.sh/linuxbrew/#dependencies for more information.
+
+EOS
+elsif macos_version < "10.9" && macos_version > "10.6"
   `/usr/bin/cc --version 2> /dev/null` =~ %r[clang-(\d{2,})]
   version = $1.to_i
   puts "Install the #{Tty.white}Command Line Tools for Xcode#{Tty.reset}: https://developer.apple.com/downloads" if mac? && version < 425

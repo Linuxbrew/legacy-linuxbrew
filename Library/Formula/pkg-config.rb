@@ -20,7 +20,7 @@ class PkgConfig < Formula
       #{HOMEBREW_LIBRARY}/ENV/pkgconfig/#{MacOS.version}
     ].uniq.join(File::PATH_SEPARATOR)
 
-    ENV.append "LDFLAGS", "-framework Foundation -framework Cocoa"
+    ENV.append "LDFLAGS", "-framework Foundation -framework Cocoa" if OS.mac?
     system "./configure", "--disable-debug",
                           "--prefix=#{prefix}",
                           "--disable-host-tool",

@@ -13,6 +13,8 @@ class AndroidSdk < Formula
   end
   revision 1
 
+  depends_on :macos => :mountain_lion
+
   bottle do
     cellar :any
     sha256 "d38989fcd9b2fcf731be79ae24834d6f50f425dd44003a149b7dea6b323a4718" => :el_capitan

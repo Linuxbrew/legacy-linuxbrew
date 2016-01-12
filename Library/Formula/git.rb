@@ -24,8 +24,13 @@ class Git < Formula
 
   option "with-blk-sha1", "Compile with the block-optimized SHA1 implementation"
   option "without-completions", "Disable bash/zsh completions from 'contrib' directory"
-  option "with-brewed-openssl", "Build with Homebrew OpenSSL instead of the system version"
-  option "with-brewed-curl", "Use Homebrew's version of cURL library"
+  if OS.mac?
+    option "with-brewed-openssl", "Build with Homebrew OpenSSL instead of the system version"
+    option "with-brewed-curl", "Use Homebrew's version of cURL library"
+  else
+    option "without-brewed-openssl", "Build with the system's OpenSSL library instead of Homebrew's"
+    option "without-brewed-curl", "Build with the system's cURL library instead of Homebrew's"
+  end
   option "with-brewed-svn", "Use Homebrew's version of SVN"
   option "with-persistent-https", "Build git-remote-persistent-https from 'contrib' directory"
 

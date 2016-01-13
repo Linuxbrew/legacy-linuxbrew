@@ -56,6 +56,10 @@ class Node < Formula
     else
       args << "--with-intl=small-icu"
     end
+    # Fix collect2: fatal error: cannot find 'ld'
+    # The snapshot feature requires the gold linker.
+    # See https://github.com/nodejs/node/issues/4212
+    args << "--without-snapshot" if OS.linux?
 
     resource("icu4c").stage buildpath/"deps/icu"
 

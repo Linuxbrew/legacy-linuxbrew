@@ -127,6 +127,10 @@ class Python < Formula
         cflags << "-I#{MacOS.sdk_path}/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers"
       end
     end
+    # Python's setup.py parses CPPFLAGS to learn search paths for the
+    # dependencies of the compiled extension modules.
+    # See Homebrew/linuxbrew#420 and Homebrew/linuxbrew#460
+    cppflags << "-I#{HOMEBREW_PREFIX}/include" if OS.linux?
 
     # Avoid linking to libgcc https://code.activestate.com/lists/python-dev/112195/
     args << "MACOSX_DEPLOYMENT_TARGET=#{MacOS.version}"

@@ -131,6 +131,10 @@ class Python3 < Formula
     end
     # Avoid linking to libgcc http://code.activestate.com/lists/python-dev/112195/
     args << "MACOSX_DEPLOYMENT_TARGET=#{MacOS.version}"
+    # Python's setup.py parses CPPFLAGS to learn search paths for the
+    # dependencies of the compiled extension modules.
+    # See Homebrew/linuxbrew#420 and Homebrew/linuxbrew#460
+    cppflags << "-I#{HOMEBREW_PREFIX}/include" if OS.linux?
 
     # We want our readline and openssl! This is just to outsmart the detection code,
     # superenv makes cc always find includes/libs!

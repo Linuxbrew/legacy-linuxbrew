@@ -9,6 +9,7 @@ class Gmp < Formula
     sha256 "1d236d4debd6880259e58a51a28f0c2d67fc57c4882f9a690ebc222c8264605b" => :el_capitan
     sha256 "f86f185327ee1f6dc44c816229f332eb262616a648afd5d1caf55c407e72035d" => :yosemite
     sha256 "2ad0982b8c33432ad9c71b0e5517171aee5bc73d2207d7bda3c306e0cf42dcc1" => :mavericks
+    sha256 "d8a327aebdd33c33d2a5c5def3aa28e30fd2fbc1da603329d24064de15007d31" => :x86_64_linux
   end
 
   option "32-bit"

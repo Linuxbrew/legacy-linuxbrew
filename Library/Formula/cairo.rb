@@ -16,7 +16,7 @@ class Cairo < Formula
   option :universal
 
   depends_on "pkg-config" => :build
-  depends_on :x11 => :optional if MacOS.version > :leopard
+  depends_on :x11 => :optional if MacOS.version > :leopard || !OS.mac?
   depends_on "freetype"
   depends_on "fontconfig"
   depends_on "libpng"

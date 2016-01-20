@@ -13,14 +13,14 @@ class AndroidSdk < Formula
   end
   revision 1
 
-  depends_on :macos => :mountain_lion
-
   bottle do
     cellar :any
     sha256 "d38989fcd9b2fcf731be79ae24834d6f50f425dd44003a149b7dea6b323a4718" => :el_capitan
     sha256 "dac31fa15cb355141d8f6df68f15e21aba584d869d6d88967740fa803c191464" => :yosemite
     sha256 "4dacf5677233c1f227d22eccc09717e1b0fc16a7a9ec0f78a95e156441c459d7" => :mavericks
   end
+
+  depends_on :macos => :mountain_lion
 
   conflicts_with "android-platform-tools",
     :because => "The Android Platform-Tools need to be installed as part of the SDK."

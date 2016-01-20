@@ -1,14 +1,14 @@
 class CrystalLang < Formula
   desc "Fast and statically typed, compiled language with Ruby-like syntax"
   homepage "http://crystal-lang.org/"
-  url "https://github.com/manastech/crystal/archive/0.10.1.tar.gz"
-  sha256 "f567866ea4cf7d0ca1356806f4871c964eca939ddcd93796ecc0e3f3889cd7f3"
+  url "https://github.com/manastech/crystal/archive/0.10.2.tar.gz"
+  sha256 "05e1af0c50438c33f2912598eac684a12b1c7193e16a19f9870de50552cede5b"
   head "https://github.com/manastech/crystal.git"
 
   bottle do
-    sha256 "70711d694b0906c1d67a82f44357c70b568a16a3f1860e14c7fe643b197a76e8" => :el_capitan
-    sha256 "be67aa7cfea8d5531541c7c1baf9293fcf26a54e3a41a0be262f8636470f40c0" => :yosemite
-    sha256 "181a4a048d438a1cd1d3dc7e9f4bb729be5499d92d9f80d35e8daa6c677fe7c6" => :mavericks
+    sha256 "2269242f2efbfce2253ec497d7c7eb1c5f760265f0c19309f71ac44475cf5975" => :el_capitan
+    sha256 "2b61a0ac887b37960a23bfea475f2431a0f29149e0108a1a2de5d3dede26da83" => :yosemite
+    sha256 "9d9c7ff18540010779527d8bbebcdb82cd3c5ff7a8c5a9f22cfc16a21f978a1e" => :mavericks
   end
 
   resource "boot" do

@@ -133,7 +133,7 @@ class Qt < Formula
     # for Qt Designer to support formulae that provide Qt Designer plug-ins.
     system "/usr/libexec/PlistBuddy",
             "-c", "Add :LSEnvironment:QT_PLUGIN_PATH string \"#{HOMEBREW_PREFIX}/lib/qt4/plugins\"",
-           "#{bin}/Designer.app/Contents/Info.plist"
+           "#{bin}/Designer.app/Contents/Info.plist" if OS.mac?
 
     Pathname.glob("#{bin}/*.app") { |app| mv app, prefix }
   end

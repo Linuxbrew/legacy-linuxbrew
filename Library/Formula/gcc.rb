@@ -111,6 +111,8 @@ class Gcc < Formula
         "--with-build-time-tools=#{binutils}",
         "--with-boot-ldflags=-static-libstdc++ -static-libgcc #{ENV["LDFLAGS"]}",
       ]
+      # Set the search path for glibc libraries and objects.
+      ENV["LIBRARY_PATH"] = Formula["glibc"].lib
     end
     args += [
       "--prefix=#{prefix}",

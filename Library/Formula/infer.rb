@@ -1,14 +1,14 @@
 class Infer < Formula
   desc "Static analyzer for Java, C and Objective-C"
   homepage "http://fbinfer.com/"
-  url "https://github.com/facebook/infer/releases/download/v0.5.0/infer-osx-v0.5.0.tar.xz"
-  sha256 "6a8547ac0b75a5e2bbeccae2169e39f753a60adbcacb6c94599fd31343a71ce7"
+  url "https://github.com/facebook/infer/releases/download/v0.6.0/infer-osx-v0.6.0.tar.xz"
+  sha256 "8a1c4d0425c0ef3efcf4683cdbeebba63f3dd2fd5e75df4f04142dc9a5a5f15d"
 
   bottle do
     cellar :any
-    sha256 "e4ef852bc85675803f4f5a0f2cca5972ea33d3947c5f0e01195d53126ea49b79" => :el_capitan
-    sha256 "f3049600231d142851d0b35ea161de5e7053abc1d9ba78bf45f07addb2298745" => :yosemite
-    sha256 "8cac200ab4fff43b90c75f20ab5a66889a9c25b525763e65e1fd8daf8ded8375" => :mavericks
+    sha256 "e0c9f221329f7f7366107225ce41543a1ca7c529079d89f713a0d3287c9d33fe" => :el_capitan
+    sha256 "0555b2cfaa38c812364646bd0fe743d11202189beab510277acba8a7b748add7" => :yosemite
+    sha256 "273243d66f0f3bb3d1fcc6e552523e59f36a06c99c7b770fd3b9bbda4b2b6fe3" => :mavericks
   end
 
   option "without-clang", "Build without C/Objective-C analyzer"

@@ -1,21 +1,23 @@
 class Bzip2 < Formula
+  desc "Freely available high-quality data compressor"
   homepage "http://www.bzip.org/"
   url "http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz"
-  sha1 "3f89f861209ce81a6bab1fd1998c0ef311712002"
+  sha256 "a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
+  revision 1
 
   bottle do
-    root_url "https://downloads.sf.net/project/machomebrew/Bottles/dupes"
-    sha1 "5d515fa12bc177239863569721caad7987e267dc" => :yosemite
-    sha1 "b250429608acd57ea5411dd6ae9b3d4675fbbffb" => :mavericks
-    sha1 "07a558b9a4271377490b876c1d1cb345ee4d3f18" => :mountain_lion
+    revision 1
+    sha256 "ceb1aab63302975659889ec645a55aaf4a60d93f296765eba2066c15c80ecb03" => :yosemite
+    sha256 "e8e0614bfb9f2db7d42d3d7111e5d0f92ab4694a6a1717b1596a46ef5daf19cf" => :mavericks
+    sha256 "524193536215c58e833703505bad765ce3a29388cec34c29c611f800a53f0874" => :mountain_lion
   end
 
   keg_only :provided_by_osx
 
   def install
+    inreplace "Makefile", "$(PREFIX)/man", "$(PREFIX)/share/man"
+
     system "make", "install", "PREFIX=#{prefix}"
-    mkdir_p share
-    mv prefix/"man", share
 
     if OS.linux?
       # Install the shared library.

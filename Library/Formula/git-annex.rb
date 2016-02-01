@@ -5,16 +5,15 @@ class GitAnnex < Formula
 
   desc "Manage files with git without checking in file contents"
   homepage "https://git-annex.branchable.com/"
-  url "https://hackage.haskell.org/package/git-annex-5.20151218/git-annex-5.20151218.tar.gz"
-  sha256 "d8aed73cbc1d1eefcbe6de7790c83f1d6458b4ac1e910d9a34b22782d16142ca"
-  revision 1
+  url "https://hackage.haskell.org/package/git-annex-6.20160126/git-annex-6.20160126.tar.gz"
+  sha256 "dc59f670a3d0bdb90db8fc6cadba8003708219bb0dc3d56867a9246d825c0d11"
 
   head "git://git-annex.branchable.com/"
 
   bottle do
-    sha256 "81e4037f30a0e4d087f401c228fe727f47764f9d981cbc56d8f7df2268988ba1" => :el_capitan
-    sha256 "dd93fb0a3958e2b757f7465c1c72462057a90995ddf0b4df022625eded820e87" => :yosemite
-    sha256 "a1848964b1239644d917d250dbbda42d73100ec5a1b5e69e66e27e0a4f179f61" => :mavericks
+    sha256 "fc72bb7797ef9255bc4ef2adb0b3a7c671970616975110effcbc3376a34285aa" => :el_capitan
+    sha256 "b95279374ca667e4df00832ac98b141f4e2f7a5a4f291376c8c81b9c120f245d" => :yosemite
+    sha256 "fbe1d8cdb78da0487a39d207af270756af9c6da102cc70b8dfc76a284c520247" => :mavericks
   end
 
   option "with-git-union-merge", "Build the git-union-merge tool"

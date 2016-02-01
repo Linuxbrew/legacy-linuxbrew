@@ -6,10 +6,19 @@ class CrystalLang < Formula
   head "https://github.com/manastech/crystal.git"
 
   bottle do
-    sha256 "4959064393605908883e43cf3821aa3ad179f1ad85d3117d507205df5b458c0f" => :el_capitan
-    sha256 "7f9fdf8cfcaedd95d8e63aeb62f7fdfbbea87edb12e3c6e2996bc6aec838cc74" => :yosemite
-    sha256 "34129143f8f9e87d070d8b404a8e7cccd1229db85f3aae11f4dee01710da455b" => :mavericks
+    revision 1
+    sha256 "35e042219f5cc68a702b7b7c20b0671cdb7aa9d01da4339641a6db41d9d7b007" => :el_capitan
+    sha256 "352154e7e32302aa9d7c7406be9a56a994ce563ae4192bb65192b8fa16881978" => :yosemite
+    sha256 "15728ee8445c863b9f9f1b78c99ea6cd8bfbee0516a92a787960d2db3775920d" => :mavericks
   end
+
+  option "without-release", "Do not build the compiler in release mode"
+  option "without-shards", "Do not include `shards` dependency manager"
+
+  depends_on "libevent"
+  depends_on "bdw-gc"
+  depends_on "llvm" => :build
+  depends_on "libyaml" if build.with?("shards")
 
   resource "boot" do
     url "https://github.com/manastech/crystal/releases/download/0.10.2/crystal-0.10.2-1-darwin-x86_64.tar.gz"
@@ -20,14 +29,6 @@ class CrystalLang < Formula
     url "https://github.com/ysbaddaden/shards/archive/v0.6.0.tar.gz"
     sha256 "cbaaa6f9d9d140ec410623b97cb86fb44640125495f1e48fb8a1875ccedc4cc5"
   end
-
-  option "without-release", "Do not build the compiler in release mode"
-  option "without-shards", "Do not include `shards` dependency manager"
-
-  depends_on "libevent"
-  depends_on "bdw-gc"
-  depends_on "llvm" => :build
-  depends_on "libyaml" if build.with?("shards")
 
   def install
     (buildpath/"boot").install resource("boot")
@@ -58,6 +59,8 @@ class CrystalLang < Formula
 
     bin.install ".build/crystal"
     prefix.install "src"
+    bash_completion.install "etc/completion.bash" => "crystal"
+    zsh_completion.install "etc/completion.zsh" => "crystal"
   end
 
   test do

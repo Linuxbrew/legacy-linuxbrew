@@ -1,15 +1,15 @@
 class Passpie < Formula
   desc "Manage login credentials from the terminal"
   homepage "https://github.com/marcwebbie/passpie"
-  url "https://pypi.python.org/packages/source/p/passpie/passpie-1.1.1.tar.gz"
-  sha256 "cc28d8813690042b62eff798dc807dd53864d1d918fff877b7fd0c1c9d556130"
+  url "https://pypi.python.org/packages/source/p/passpie/passpie-1.2.0.tar.gz"
+  sha256 "d769fd20454a8cd7802ac145d95e144d4f61b4f467999d19c50349766956d51d"
   head "https://github.com/marcwebbie/passpie.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "6c916faedd52c2421b7ef4407c5e036ad653ead17620b04ee47305cc745310f3" => :el_capitan
-    sha256 "9bd1106249dc25a0566e9963e00f0ff725653cf5fb58fe02d88fe9b92e66df93" => :yosemite
-    sha256 "35f63abfb770a087312aa1dc517fd87ab42be4f4e6ea17cda6adac262d013eb1" => :mavericks
+    sha256 "bb97d90f195935368be486424f8e19165d64c2aed5497d9c51c34e860eb82dd8" => :el_capitan
+    sha256 "916f2da581e3575a31ec9d6b8c533a2b6351756d537ef19651769d256b7c069d" => :yosemite
+    sha256 "588af60dec0c750c393e4c5eeac0913fe712a3fc02ea9b569bb05990536e0d56" => :mavericks
   end
 
   depends_on :python if MacOS.version <= :snow_leopard
@@ -36,8 +36,8 @@ class Passpie < Formula
   end
 
   resource "tinydb" do
-    url "https://pypi.python.org/packages/source/t/tinydb/tinydb-3.1.1.tar.gz"
-    sha256 "b704d94b44c5dbc4f4b038f22aa30b4c7398a8d52881767b4e53edeaeab6d3d0"
+    url "https://pypi.python.org/packages/source/t/tinydb/tinydb-3.1.2.zip"
+    sha256 "6d9df6c30fc37dad487c23bfadfa6161de422a7f2b16b55d779df88559fc9095"
   end
 
   def install

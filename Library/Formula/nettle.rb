@@ -16,7 +16,7 @@ class Nettle < Formula
 
   def install
     # OS X doesn't use .so libs. Emailed upstream 04/02/2016.
-    inreplace "testsuite/dlopen-test.c", "libnettle.so", "libnettle.dylib"
+    inreplace "testsuite/dlopen-test.c", "libnettle.so", "libnettle.dylib" if OS.mac?
 
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",

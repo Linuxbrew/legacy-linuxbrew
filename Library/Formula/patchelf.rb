@@ -26,8 +26,9 @@ class Patchelf < Formula
 
     system "./bootstrap.sh" if build.head?
     system "./configure", "--prefix=#{prefix}",
-      ("CXXFLAGS=-static" if build.with? "static"),
-      ("CXXFLAGS=-static-libgcc -static-libstdc++" if build.with? "static-libstdc++"),
+      if build.with?("static") then "CXXFLAGS=-static"
+      elsif build.with?("static-libstdc++") then "CXXFLAGS=-static-libgcc -static-libstdc++"
+      end,
       "--disable-debug", "--disable-dependency-tracking", "--disable-silent-rules"
     system "make", "install"
   end

@@ -6,7 +6,7 @@ class LinuxHeaders < Formula
   # tag "linuxbrew"
 
   bottle do
-    cellar :any
+    cellar :any_skip_relocation
     sha256 "f8aa29cafbdfd0a815970dfcffe5e56cc9a8033b34caee5ea5483e729cff9700" => :x86_64_linux
   end
 

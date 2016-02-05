@@ -7,10 +7,10 @@ class Ansible < Formula
   head "https://github.com/ansible/ansible.git", :branch => "devel"
 
   bottle do
-    revision 1
-    sha256 "c218d673fd8e98cbc08e6431d6987ece23724a4cd34aaaad9615c556085c8459" => :el_capitan
-    sha256 "ec1564b7f079c608e952883e00d2cd1132f6db2d7dc771a5e8b62a109274ea72" => :yosemite
-    sha256 "beb6175753b9f105ed475f5b5db738a164cdadb3e8e6408d4c8b98c1b4b525b9" => :mavericks
+    revision 2
+    sha256 "7d1afbbf70603d8e1c3bf14b507d6b1ffc50bc2694e99fafde63a5b2cc601d22" => :el_capitan
+    sha256 "d5b256451edee339c92b3ca1ea2dd9c91ae012afa0efc6f0716f1af79cefa463" => :yosemite
+    sha256 "c4291da7b959bca1455367f205e9a334dece4937a27faab14dc919b65c4fcd4d" => :mavericks
   end
 
   devel do
@@ -202,6 +202,14 @@ class Ansible < Formula
   resource "python-dateutil" do
     url "https://pypi.python.org/packages/source/p/python-dateutil/python-dateutil-2.4.2.tar.gz"
     sha256 "3e95445c1db500a344079a47b171c45ef18f57d188dffdb0e4165c71bea8eb3d"
+  end
+
+  #
+  # apache libcloud (for Google GCE cupport)
+  #
+  resource "apache-libcloud" do
+    url "https://pypi.python.org/packages/source/a/apache-libcloud/apache-libcloud-0.20.1.tar.gz"
+    sha256 "f36dcf8e6a4270c86b521ab4868fd762a7ec217195e126a8ccb028a82cf55466"
   end
 
   #

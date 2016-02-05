@@ -5,7 +5,10 @@ class Systemd < Formula
   sha256 "085e088650afbfc688ccb13459aedb1fbc7c8810358605b076301f472d51cc4f"
   # tag "linuxbrew"
 
+  depends_on "homebrew/dupes/gperf" => :build
+  depends_on "intltool" => :build
   depends_on "libcap"
+  depends_on "util-linux" # for libmount
   depends_on "XML::Parser" => :perl
 
   def install

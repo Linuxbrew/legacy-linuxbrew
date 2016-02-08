@@ -2,18 +2,18 @@ class Fstar < Formula
   desc "Language with a type system for program verification"
   homepage "https://www.fstar-lang.org/"
   url "https://github.com/FStarLang/FStar.git",
-    :tag => "0.9.2.0",
-    :revision => "658799a67706b635c5c42498fb42c21cf126e56e"
+    :tag => "v0.9.2.0",
+    :revision => "2a8ce0b3dfbfb9703079aace0d73f2479f0d0ce2"
   head "https://github.com/FStarLang/FStar.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "07876ce2eea2d7c3ab99f3aa8babbc51e97bf7c3e5a95e8f031046b2b33ad3d1" => :el_capitan
-    sha256 "f463732649500403aea50647b9a2f9e73530b3e6b541442f0491f8034ffba10a" => :yosemite
-    sha256 "d81ab524ccbb6d0735fa99b19c3536f02813a4b2cf87ebe138df40c44a0cb1cf" => :mavericks
+    revision 1
+    sha256 "862e16a525bec7ff0d7536cf2d408b19fb30b0d5449264852485749ca7a6554b" => :el_capitan
+    sha256 "9e3974a724b8d484939ad01f52cbf836153a46693bc5ba0215b2a76e606c7e49" => :yosemite
+    sha256 "a70dcda3237a775449d95f640610add3ea4201f514dab28a5d8158caf5135ecf" => :mavericks
   end
 
-  depends_on "mono" => :build
   depends_on "opam" => :build
   depends_on "ocaml" => :recommended
   depends_on "z3" => :recommended
@@ -43,9 +43,8 @@ class Fstar < Formula
       cp r.cached_download, archives/original_name
       modules << "#{r.name}=#{r.version}"
     end
-    system "opam", "install", *modules
 
-    system "make", "-C", "src/"
+    system "opam", "install", *modules
     system "opam", "config", "exec", "--",
     "make", "-C", "src/ocaml-output/"
 
@@ -67,9 +66,6 @@ class Fstar < Formula
   end
 
   def caveats; <<-EOS.undent
-    F* standard library is available in #{prefix}/stdlib:
-    - alias fstar='fstar.exe --include #{prefix}/stdlib --prims prims.fst'
-
     F* code can be extracted to OCaml code.
     To compile the generated OCaml code, you must install the
     package 'batteries' from the Opam package manager:
@@ -78,14 +74,13 @@ class Fstar < Formula
 
     F* code can be extracted to F# code.
     To compile the generated F# (.NET) code, you must install
-    Mono and the FSharp compilers:
+    the 'mono' package that includes the fsharp compiler:
     - brew install mono
     EOS
   end
 
   test do
     system "#{bin}/fstar.exe",
-    "--include", "#{prefix}/stdlib",
     "--include", "#{prefix}/examples/unit-tests",
     "--admit_fsi", "FStar.Set",
     "FStar.Set.fsi", "FStar.Heap.fst",

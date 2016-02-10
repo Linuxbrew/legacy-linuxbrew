@@ -4,16 +4,16 @@ class Kapacitor < Formula
   desc "Open source time series data processor"
   homepage "https://github.com/influxdata/kapacitor"
   url "https://github.com/influxdata/kapacitor.git",
-    :tag => "v0.10.0",
-    :revision => "35c9c6fe6543f9d65779d10723ea3a70657d8bba"
+    :tag => "v0.10.1",
+    :revision => "22b917b4722addf9ff604d16fa01a09431641c55"
 
   head "https://github.com/influxdata/kapacitor.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "2906cc0be7f6bc832ebd4df805cb4d859da5cc3e2730604dbe8bfd41e4e938d7" => :el_capitan
-    sha256 "20d0f8ca06186bfade9763ed76c90e80a5a6fb19a8dbce5beb300bd2c65f38eb" => :yosemite
-    sha256 "7564e43eb0852049a1ec0c1557622592ccf345bbdac9e8ae3c09fe288eeb37c2" => :mavericks
+    sha256 "efc23ea8552b81deb78223f2ebdec8769846a4f84756411c323e20d3bc1e4505" => :el_capitan
+    sha256 "9c9fd038c39e970a02f0c05482c5211094bbe429dbf162a746064a0be13e55f7" => :yosemite
+    sha256 "f948ff298c8bdac82b0caefb743a834348d67b38644b2746dea6ae720cca4275" => :mavericks
   end
 
   depends_on "go" => :build
@@ -31,6 +31,11 @@ class Kapacitor < Formula
   go_resource "github.com/boltdb/bolt" do
     url "https://github.com/boltdb/bolt.git",
     :revision => "ee4a0888a9abe7eefe5a0992ca4cb06864839873"
+  end
+
+  go_resource "github.com/cenkalti/backoff" do
+    url "https://github.com/cenkalti/backoff.git",
+    :revision => "4dc77674aceaabba2c7e3da25d4c823edfb73f99"
   end
 
   go_resource "github.com/dustin/go-humanize" do
@@ -65,7 +70,7 @@ class Kapacitor < Formula
 
   go_resource "github.com/influxdb/influxdb" do
     url "https://github.com/influxdb/influxdb.git",
-    :revision => "28ae8b6fe06705999a444d47c0766cc47b007643"
+    :revision => "af1a22da763414b6cc2f8c12f25b107521c19a30"
   end
 
   go_resource "github.com/influxdb/usage-client" do
@@ -194,17 +199,18 @@ class Kapacitor < Formula
   end
 
   test do
-    logo = <<-EOS.undent
-      '##:::'##::::'###::::'########:::::'###:::::'######::'####:'########::'#######::'########::
-       ##::'##::::'## ##::: ##.... ##:::'## ##:::'##... ##:. ##::... ##..::'##.... ##: ##.... ##:
-       ##:'##::::'##:. ##:: ##:::: ##::'##:. ##:: ##:::..::: ##::::: ##:::: ##:::: ##: ##:::: ##:
-       #####::::'##:::. ##: ########::'##:::. ##: ##:::::::: ##::::: ##:::: ##:::: ##: ########::
-       ##. ##::: #########: ##.....::: #########: ##:::::::: ##::::: ##:::: ##:::: ##: ##.. ##:::
-       ##:. ##:: ##.... ##: ##:::::::: ##.... ##: ##::: ##:: ##::::: ##:::: ##:::: ##: ##::. ##::
-       ##::. ##: ##:::: ##: ##:::::::: ##:::: ##:. ######::'####:::: ##::::. #######:: ##:::. ##:
-      ..::::..::..:::::..::..:::::::::..:::::..:::......:::....:::::..::::::.......:::..:::::..::
-    EOS
     (testpath/"config.toml").write shell_output("kapacitord config")
-    assert_match /#{logo}/m, shell_output("kapacitord -config #{testpath}/config.toml", 1)
+
+    pid = fork do
+      exec "#{bin}/kapacitord -config #{testpath}/config.toml"
+    end
+    sleep 2
+
+    begin
+      shell_output("#{bin}/kapacitor level info")
+    ensure
+      Process.kill("SIGINT", pid)
+      Process.wait(pid)
+    end
   end
 end

@@ -28,7 +28,7 @@ class Patchelf < Formula
 
   def install
     # Fix ./configure: line 4: .: filename argument required
-    inreplace "configure.ac", "m4_esyscmd([echo -n $(cat ./version)])", version
+    inreplace "configure.ac", "m4_esyscmd([echo -n $(cat ./version)])", version unless build.head?
 
     system "./bootstrap.sh" if build.head?
     system "./configure", "--prefix=#{prefix}",

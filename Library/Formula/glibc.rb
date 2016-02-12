@@ -58,10 +58,14 @@ class Glibc < Formula
 
     # Fix up previously installed executables.
     if Formula["patchelf"].installed?
-      require "cmd/patchelf"
       %w[patchelf binutils].each do |s|
         f = Formula[s]
-        Homebrew.patchelf_formula f if f.installed?
+        if f.installed?
+          ohai "Fixing up #{f.full_name}..."
+          keg = Keg.new f.prefix
+          keg.relocate_install_names Keg::PREFIX_PLACEHOLDER, HOMEBREW_PREFIX,
+            Keg::CELLAR_PLACEHOLDER, HOMEBREW_CELLAR
+        end
       end
     end
   end

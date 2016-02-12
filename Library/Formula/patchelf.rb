@@ -39,6 +39,17 @@ class Patchelf < Formula
     system "make", "install"
   end
 
+  def post_install
+    # Fix up binutils after glibc and patchelf are installed.
+    binutils = Formula["binutils"]
+    if binutils.installed? && Formula["glibc"].installed?
+      ohai "Fixing up #{binutils.full_name}..."
+      keg = Keg.new binutils.prefix
+      keg.relocate_install_names Keg::PREFIX_PLACEHOLDER, HOMEBREW_PREFIX,
+        Keg::CELLAR_PLACEHOLDER, HOMEBREW_CELLAR
+    end
+  end
+
   test do
     system "#{bin}/patchelf", "--version"
   end

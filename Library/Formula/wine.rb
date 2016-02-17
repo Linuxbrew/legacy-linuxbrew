@@ -115,7 +115,7 @@ class Wine < Formula
   end
 
   def install
-    ENV.m32 # Build 32-bit; Wine doesn't support 64-bit host builds on OS X.
+    ENV.m32 if OS.mac? # Build 32-bit; Wine doesn't support 64-bit host builds on OS X.
 
     # Help configure find libxml2 in an XCode only (no CLT) installation.
     ENV.libxml2

@@ -113,6 +113,7 @@ class Gcc < Formula
       binutils = Formula["binutils"].prefix/"x86_64-unknown-linux-gnu/bin"
       args += [
         "--with-native-system-header-dir=#{HOMEBREW_PREFIX}/include",
+        "--with-local-prefix=#{HOMEBREW_PREFIX}/local",
         "--with-build-time-tools=#{binutils}",
         "--with-boot-ldflags=-static-libstdc++ -static-libgcc #{ENV["LDFLAGS"]}",
       ]

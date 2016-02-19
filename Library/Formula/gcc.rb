@@ -260,7 +260,7 @@ class Gcc < Formula
       ld_so = glibc.opt_lib/"ld-linux-x86-64.so.2"
       specs.write specs_string + <<-EOS.undent
         *link_libgcc:
-        #{build.with?("glibc") ? "-nostdlib -L#{libgcc}" : "+"} -L#{HOMEBREW_PREFIX}/lib
+        #{glibc.installed? ? "-nostdlib -L#{libgcc}" : "+"} -L#{HOMEBREW_PREFIX}/lib
 
         *link:
         + -rpath #{HOMEBREW_PREFIX}/lib#{" --dynamic-linker #{ld_so}" if glibc.installed?}

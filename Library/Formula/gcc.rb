@@ -250,25 +250,22 @@ class Gcc < Formula
       rm_f [specs_orig, specs]
 
       # Save a backup of the default specs file
-      s = `#{bin}/#{gcc} -dumpspecs`
+      specs_string = `#{bin}/#{gcc} -dumpspecs`
       raise "command failed: #{gcc} -dumpspecs" if $?.exitstatus != 0
-      specs_orig.write s
+      specs_orig.write specs_string
 
       # Set the library search path
-      if build.with?("glibc")
-        s += "*link_libgcc:\n-nostdlib -L#{lib}/gcc/x86_64-unknown-linux-gnu/#{version} -L#{HOMEBREW_PREFIX}/lib\n\n"
-      else
-        s += "*link_libgcc:\n+ -L#{HOMEBREW_PREFIX}/lib\n\n"
-      end
-      s += "*link:\n+ -rpath #{HOMEBREW_PREFIX}/lib"
-
-      # Set the dynamic linker
       glibc = Formula["glibc"]
-      if glibc.installed?
-        s += " --dynamic-linker #{glibc.opt_lib}/ld-linux-x86-64.so.2"
-      end
-      s += "\n\n"
-      specs.write s
+      libgcc = lib/"gcc/x86_64-unknown-linux-gnu"/version
+      ld_so = glibc.opt_lib/"ld-linux-x86-64.so.2"
+      specs.write specs_string + <<-EOS.undent
+        *link_libgcc:
+        #{build.with?("glibc") ? "-nostdlib -L#{libgcc}" : "+"} -L#{HOMEBREW_PREFIX}/lib
+
+        *link:
+        + -rpath #{HOMEBREW_PREFIX}/lib#{" --dynamic-linker #{ld_so}" if glibc.installed?}
+
+      EOS
     end
   end
 

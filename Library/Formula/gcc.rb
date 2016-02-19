@@ -28,9 +28,11 @@ class Gcc < Formula
   head "svn://gcc.gnu.org/svn/gcc/trunk"
 
   bottle do
+    cellar :any if OS.linux?
     sha256 "90ad519442f0336b0beee3cf2be305ea495fb2e2ad82c2a96c5b0c3bcef8f268" => :el_capitan
     sha256 "334bd7afbec85740ec7c49eedf52858209c31ed1f284ad10ccab7c50a41bcd35" => :yosemite
     sha256 "679c9bfc2082f8ab4320c89082b08c4eab9523dd72bfed27fe4b712de7013a1f" => :mavericks
+    sha256 "2c6ae8e098830e19f87d8426b49d353b6cbc0b89d9259bae242d57b6694c9039" => :x86_64_linux
   end
 
   option "with-java", "Build the gcj compiler"

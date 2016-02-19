@@ -259,6 +259,9 @@ class Gcc < Formula
       libgcc = lib/"gcc/x86_64-unknown-linux-gnu"/version
       ld_so = glibc.opt_lib/"ld-linux-x86-64.so.2"
       specs.write specs_string + <<-EOS.undent
+        *cpp_unique_options:
+        + -isystem #{HOMEBREW_PREFIX}/include
+
         *link_libgcc:
         #{glibc.installed? ? "-nostdlib -L#{libgcc}" : "+"} -L#{HOMEBREW_PREFIX}/lib
 

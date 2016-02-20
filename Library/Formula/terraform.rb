@@ -38,12 +38,11 @@ class Terraform < Formula
   end
 
   go_resource "google.golang.org/grpc" do
-    url "https://github.com/grpc/grpc-go", :revision => "5d64098b94ee9dbbea8ddc130208696bcd199ba4"
+    url "https://github.com/grpc/grpc-go.git", :revision => "5d64098b94ee9dbbea8ddc130208696bcd199ba4"
   end
 
   def install
     ENV["GOPATH"] = buildpath
-    ENV["GO15VENDOREXPERIMENT"] = "1"
     # For the gox buildtool used by terraform, which doesn't need to
     # get installed permanently
     ENV.append_path "PATH", buildpath
@@ -63,7 +62,7 @@ class Terraform < Formula
     end
 
     cd terrapath do
-      terraform_files = `go list ./...`.lines.map {|f| f.strip unless f.include? "/vendor/" }.compact
+      terraform_files = `go list ./...`.lines.map { |f| f.strip unless f.include? "/vendor/" }.compact
       system "go", "test", *terraform_files
 
       mkdir "bin"

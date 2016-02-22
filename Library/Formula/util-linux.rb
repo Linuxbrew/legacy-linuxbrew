@@ -13,11 +13,10 @@ class UtilLinux < Formula
       "--disable-silent-rules",
       "--prefix=#{prefix}",
       # Fix chgrp: changing group of 'wall': Operation not permitted
-      "--disable-use-tty-group"
+      "--disable-use-tty-group",
+      # Conflicts with coreutils.
+      "--disable-kill"
     system "make", "install"
-
-    # Conflicts with coreutils.
-    rm bin/"kill"
   end
 
   test do

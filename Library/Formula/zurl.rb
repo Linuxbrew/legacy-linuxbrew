@@ -1,22 +1,14 @@
 class Zurl < Formula
   desc "HTTP and WebSocket client worker with ZeroMQ interface"
   homepage "https://github.com/fanout/zurl"
-  url "https://dl.bintray.com/fanout/source/zurl-1.5.0.tar.bz2"
-  sha256 "102456174569d882c77dde80669c51bee4a418c5ed81a27ea15d7a0810d1a555"
-
-  revision 1
-
-  # ensure unit tests don't install on 1.5.0. remove after next release
-  patch do
-    url "https://github.com/fanout/zurl/commit/6f727e9e26054889ced261993e91f11dea3a1b5c.patch"
-    sha256 "7fff340cec94d6c4883aacbf991ac97ee963e8628cda0ad3c67daddb759a26a9"
-  end
+  url "https://dl.bintray.com/fanout/source/zurl-1.5.1.tar.bz2"
+  sha256 "945fccc160ea655249e7dd3706a5db096bab6d1d08fc6e290e53a9635f07c7d4"
 
   bottle do
     cellar :any
-    sha256 "2cc3af9cd0e76666eb808bf01958b04966b6e31147e521c6d8bcce07dd121ce5" => :el_capitan
-    sha256 "ec243ccf738d5ad8b2c0e38158d5ac5ebf04b97706917582c7fa0d8742e9ef0b" => :yosemite
-    sha256 "75ec782dec541e3e190519a546ff58ff27d8afca60bec01d90654e81e893a36c" => :mavericks
+    sha256 "c9d48e5eff5ff9cc57cd99eecadea25047216c9bc3510f813bd5324525f0b866" => :el_capitan
+    sha256 "9d5b6ce92eb76bde188915070d383a98812274140f20c9315b89f7af7f737f69" => :yosemite
+    sha256 "a2bb8f6471dbc757b8a46e0a60e743a7a3e43f5b8ca4f3128eb8c6902922e243" => :mavericks
   end
 
   depends_on "pkg-config" => :build

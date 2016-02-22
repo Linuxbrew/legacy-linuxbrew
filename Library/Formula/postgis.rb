@@ -6,10 +6,10 @@ class Postgis < Formula
 
   bottle do
     cellar :any
-    revision 1
-    sha256 "6e18d0615e27b1afcbf0280185a31cc63259401c6042d82177609fa48d4a6f39" => :el_capitan
-    sha256 "b127be9f51766193b4a0713e313047316f7f89532258345174f29a9a27553b9d" => :yosemite
-    sha256 "5bf42a43897e9358f0a9ee0b9aa290717c2b74fede7488df66b9c0c344c5adb0" => :mavericks
+    revision 2
+    sha256 "2dd01d3e7b0a5a8c7b69bdbd8389ab8d857de755e393e213dc818828fb0dd540" => :el_capitan
+    sha256 "6aed14810aea9784c4dc2a00ec825bb6032f200e7512c9611a41a82fba1e6d55" => :yosemite
+    sha256 "2d4df95d9aa6609d8bf7409be18a4173b7ba7d364a3df1e0a8445d330ae8fbb2" => :mavericks
   end
 
   head do
@@ -62,7 +62,7 @@ class Postgis < Formula
       # PostGIS gets all of its compiler flags from the PGXS makefiles. This
       # makes it nigh impossible to tell the buildsystem where our keg-only
       # gettext installations are.
-      "--disable-nls"
+      "--disable-nls",
     ]
 
     args << "--with-gui" if build.with? "gui"
@@ -94,9 +94,9 @@ class Postgis < Formula
     bin.install Dir["stage/**/bin/*"]
     lib.install Dir["stage/**/lib/*"]
     include.install Dir["stage/**/include/*"]
-    (doc/"postgresql/extentsion").install Dir["stage/**/share/doc/postgresql/extension/*"]
+    (doc/"postgresql/extension").install Dir["stage/**/share/doc/postgresql/extension/*"]
     (share/"postgresql/extension").install Dir["stage/**/share/postgresql/extension/*"]
-    (share/"postgis").install Dir["stage/**/contrib/postgis-*/*"]
+    pkgshare.install Dir["stage/**/contrib/postgis-*/*"]
     (share/"postgis_topology").install Dir["stage/**/contrib/postgis_topology-*/*"]
 
     # Extension scripts
@@ -124,7 +124,7 @@ class Postgis < Formula
         http://postgis.net/docs/manual-2.2/postgis_installation.html#upgrading
 
       PostGIS SQL scripts installed to:
-        #{HOMEBREW_PREFIX}/share/postgis
+        #{opt_pkgshare}
       PostGIS plugin libraries installed to:
         #{HOMEBREW_PREFIX}/lib
       PostGIS extension modules installed to:

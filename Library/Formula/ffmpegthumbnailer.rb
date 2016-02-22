@@ -1,16 +1,16 @@
 class Ffmpegthumbnailer < Formula
   desc "Create thumbnails for your video files"
   homepage "https://github.com/dirkvdb/ffmpegthumbnailer"
-  url "https://github.com/dirkvdb/ffmpegthumbnailer/releases/download/2.1.1/ffmpegthumbnailer-2.1.1.tar.bz2"
-  sha256 "f1f1b54b7903d726a118d7b2a2992cacef561517567f3a547964ad48cb5c89bd"
+  url "https://github.com/dirkvdb/ffmpegthumbnailer/archive/2.1.1.tar.gz"
+  sha256 "e43d8aae7e80771dc700b3d960a0717d5d28156684a8ddc485572cbcbc4365e9"
+  revision 1
   head "https://github.com/dirkvdb/ffmpegthumbnailer.git"
 
   bottle do
     cellar :any
-    revision 1
-    sha256 "3d8ab9f72ae234c9ef9bc8006c3d207f4c113d54fe4847aa63e13211fa9eeafd" => :el_capitan
-    sha256 "784e2a31b78ae51bb29dd5007e78091e61fb7d1d13065a4754ba42d5b8bbfc49" => :yosemite
-    sha256 "7ee9048a68c5e75ca90ffe418a96e0bd8af4c4b038c093b3cb75358d3a7d0587" => :mavericks
+    sha256 "7865ae4c722196f8bb9700d4f36f875832cfd6d53e1adec4711b313e2c2d539d" => :el_capitan
+    sha256 "79a11e926a3333c7d310e1b04a3bdc6de539ab0db5bdb9e1ae68eecd0f8491c1" => :yosemite
+    sha256 "ff2f37d29fdcee104e219718ba94b53118b85b4b6cc862a55bb3885607957c71" => :mavericks
   end
 
   depends_on "cmake" => :build

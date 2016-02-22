@@ -15,6 +15,9 @@ class UtilLinux < Formula
       # Fix chgrp: changing group of 'wall': Operation not permitted
       "--disable-use-tty-group"
     system "make", "install"
+
+    # Conflicts with coreutils.
+    rm bin/"kill"
   end
 
   test do

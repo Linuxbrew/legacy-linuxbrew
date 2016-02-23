@@ -63,7 +63,7 @@ class Glibc < Formula
     (prefix/"etc").install_symlink sys_localtime if sys_localtime.exist? && !brew_localtime.exist?
 
     # Install ld.so symlink.
-    FileUtils.ln_sf lib/"ld-linux-x86-64.so.2", HOMEBREW_PREFIX/"lib/ld.so"
+    ln_sf lib/"ld-linux-x86-64.so.2", HOMEBREW_PREFIX/"lib/ld.so"
   end
 
   test do

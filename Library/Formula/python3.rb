@@ -28,6 +28,7 @@ class Python3 < Formula
   depends_on "xz" => :recommended # for the lzma module added in 3.3
   depends_on "homebrew/dupes/tcl-tk" => :optional
   depends_on :x11 if build.with?("tcl-tk") && Tab.for_name("homebrew/dupes/tcl-tk").with?("x11")
+  depends_on "bzip2" unless OS.mac?
 
   skip_clean "bin/pip3", "bin/pip-3.4", "bin/pip-3.5"
   skip_clean "bin/easy_install3", "bin/easy_install-3.4", "bin/easy_install-3.5"

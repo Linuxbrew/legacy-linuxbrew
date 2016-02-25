@@ -32,6 +32,7 @@ class Python < Formula
   depends_on "homebrew/dupes/tcl-tk" => :optional
   depends_on "berkeley-db4" => :optional
   depends_on :x11 if build.with?("tcl-tk") && Tab.for_name("homebrew/dupes/tcl-tk").with?("x11")
+  depends_on "bzip2" unless OS.mac?
 
   skip_clean "bin/pip", "bin/pip-2.7"
   skip_clean "bin/easy_install", "bin/easy_install-2.7"

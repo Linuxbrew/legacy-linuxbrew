@@ -17,6 +17,7 @@ class Cmake < Formula
   option "with-completion", "Install Bash completion (Has potential problems with system bash)"
 
   depends_on "sphinx-doc" => :build if build.with? "docs"
+  depends_on "bzip2" unless OS.mac?
   depends_on "curl" unless OS.mac?
 
   # The `with-qt` GUI option was removed due to circular dependencies if

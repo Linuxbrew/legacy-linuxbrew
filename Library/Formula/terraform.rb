@@ -73,7 +73,7 @@ class Terraform < Formula
       arch = MacOS.prefer_64_bit? ? "amd64" : "386"
       system "gox",
         "-arch", arch,
-        "-os", "darwin",
+        "-os", OS::NAME,
         "-output", "bin/terraform-{{.Dir}}", *terraform_files
       bin.install "bin/terraform-terraform" => "terraform"
       bin.install Dir["bin/*"]

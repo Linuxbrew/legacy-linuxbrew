@@ -89,7 +89,7 @@ class Curl < Formula
     else
       args << "--disable-ares"
     end
-    args << "--disable-ldap" if build.without? "ldap"
+    args << "--disable-ldap" if build.without? "openldap"
 
     system "./configure", *args
     system "make", "install"

@@ -3,8 +3,8 @@ class Patchelf < Formula
   homepage "https://nixos.org/patchelf.html"
   # tag "linuxbrew"
 
-  url "http://nixos.org/releases/patchelf/patchelf-0.8/patchelf-0.8.tar.bz2"
-  sha256 "c99f84d124347340c36707089ec8f70530abd56e7827c54d506eb4cc097a17e7"
+  url "http://nixos.org/releases/patchelf/patchelf-0.9/patchelf-0.9.tar.gz"
+  sha256 "f2aa40a6148cb3b0ca807a1bf836b081793e55ec9e5540a5356d800132be7e0a"
 
   bottle do
     cellar :any
@@ -21,9 +21,6 @@ class Patchelf < Formula
   option "without-static-libstdc++", "Link libstdc++ dynamically"
 
   def install
-    # Fix ./configure: line 4: .: filename argument required
-    inreplace "configure.ac", "m4_esyscmd([echo -n $(cat ./version)])", version unless build.head?
-
     system "./bootstrap.sh" if build.head?
     system "./configure", "--prefix=#{prefix}",
       if build.with?("static") then "CXXFLAGS=-static"

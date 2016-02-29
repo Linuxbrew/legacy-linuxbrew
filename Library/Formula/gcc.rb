@@ -118,7 +118,6 @@ class Gcc < Formula
         "--with-native-system-header-dir=#{HOMEBREW_PREFIX}/include",
         "--with-local-prefix=#{HOMEBREW_PREFIX}/local",
         "--with-build-time-tools=#{binutils}",
-        "--with-boot-ldflags=-static-libstdc++ -static-libgcc #{ENV["LDFLAGS"]}",
       ]
       # Set the search path for glibc libraries and objects.
       ENV["LIBRARY_PATH"] = Formula["glibc"].lib
@@ -145,6 +144,9 @@ class Gcc < Formula
       "--with-pkgversion=Homebrew #{name} #{pkg_version} #{build.used_options*" "}".strip,
       "--with-bugurl=https://github.com/Homebrew/homebrew/issues",
     ]
+
+    # Fix cc1: error while loading shared libraries: libisl.so.15
+    args << "--with-boot-ldflags=-static-libstdc++ -static-libgcc #{ENV["LDFLAGS"]}" if OS.linux?
 
     # "Building GCC with plugin support requires a host that supports
     # -fPIC, -shared, -ldl and -rdynamic."

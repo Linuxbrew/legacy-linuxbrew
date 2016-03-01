@@ -1,15 +1,15 @@
 class Racket < Formula
   desc "Modern programming language in the Lisp/Scheme family"
-  homepage "http://racket-lang.org/"
-  url "http://mirror.racket-lang.org/installers/6.3/racket-minimal-6.3-src-builtpkgs.tgz"
+  homepage "https://racket-lang.org/"
+  url "https://mirror.racket-lang.org/installers/6.3/racket-minimal-6.3-src-builtpkgs.tgz"
   version "6.3"
   sha256 "72d79026e1301ee222089fb555b3eb7290b95f4b7541fec21b4ddb5842fff081"
 
   bottle do
-    revision 1
-    sha256 "bfa9a6ecd8ec2b61fe58f7f3576471f09c08c1ec404d059a18609bff6728967b" => :el_capitan
-    sha256 "dc4b3f00480486eb54a1e86b6c7148cfd14fee1fb3e8cd7f8caa4b8c11436729" => :yosemite
-    sha256 "01ebd100e40cdc605d5023da5a608b8a73c4151829bf36806baec71aa126d04a" => :mavericks
+    revision 2
+    sha256 "f7b55fde0d4b967b4c9617b47d81a971826ff91cebbae415d681ffeb7c8df7a9" => :el_capitan
+    sha256 "5d2b3406f75501379c50c6506c9c817bfadadf236ddb106ced5be9d69d513af0" => :yosemite
+    sha256 "fd5d32d41b49e06c0a74669ad64239ccb76c8eb73c99d0d9300f18119ae76886" => :mavericks
   end
 
   # these two files are amended when (un)installing packages
@@ -34,7 +34,7 @@ class Racket < Formula
     end
 
     # configure racket's package tool (raco) to do the Right Thing
-    # see: http://docs.racket-lang.org/raco/config-file.html
+    # see: https://docs.racket-lang.org/raco/config-file.html
     inreplace etc/"racket/config.rktd" do |s|
         s.gsub!(
             /\(bin-dir\s+\.\s+"#{Regexp.quote(bin)}"\)/,

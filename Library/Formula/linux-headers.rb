@@ -14,4 +14,8 @@ class LinuxHeaders < Formula
     system "make", "headers_install", "INSTALL_HDR_PATH=#{prefix}"
     rm Dir[prefix/"**/{.install,..install.cmd}"]
   end
+
+  test do
+    system "ls", include
+  end
 end

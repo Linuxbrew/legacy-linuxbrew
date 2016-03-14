@@ -57,6 +57,7 @@ class Openssl < Formula
     zlib-dynamic
     shared
     enable-cms
+    #{[ENV.cppflags, ENV.cflags, ENV.ldflags].join(" ") unless OS.mac?}
   ]
   end
 

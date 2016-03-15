@@ -134,8 +134,8 @@ class Python < Formula
     # paths for the dependencies of the compiled extension modules.
     # See Homebrew/linuxbrew#420, Homebrew/linuxbrew#460, and Homebrew/linuxbrew#875
     if OS.linux?
-      cppflags << "-I#{HOMEBREW_PREFIX}/include"
-      ldflags << "-L#{HOMEBREW_PREFIX}/lib"
+      cppflags << ENV.cppflags << " -I#{HOMEBREW_PREFIX}/include"
+      ldflags << ENV.ldflags
     end
 
     # Avoid linking to libgcc https://code.activestate.com/lists/python-dev/112195/

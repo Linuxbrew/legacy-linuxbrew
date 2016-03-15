@@ -60,6 +60,8 @@ class Cmake < Formula
     end
 
     (share/"emacs/site-lisp/cmake").install "Auxiliary/cmake-mode.el"
+
+    rm_f pkgshare/"Modules/CPack.OSXScriptLauncher.in" unless OS.mac?
   end
 
   test do

@@ -136,10 +136,10 @@ class Python3 < Formula
 
     # Python's setup.py parses CPPFLAGS and LDFLAGS to learn search
     # paths for the dependencies of the compiled extension modules.
-    # See Homebrew/linuxbrew#420, Homebrew/linuxbrew#460, and Homebrew/linuxbrew#875
+    # See Linuxbrew/linuxbrew#420, Linuxbrew/linuxbrew#460, and Linuxbrew/linuxbrew#875
     if OS.linux?
-      cppflags << "-I#{HOMEBREW_PREFIX}/include"
-      ldflags << "-L#{HOMEBREW_PREFIX}/lib"
+      cppflags << ENV.cppflags << " -I#{HOMEBREW_PREFIX}/include"
+      ldflags << ENV.ldflags
     end
 
     # We want our readline and openssl! This is just to outsmart the detection code,

@@ -6,6 +6,9 @@ class Libfuse < Formula
   head "https://github.com/libfuse/libfuse.git"
   # tag "linuxbrew"
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
   depends_on "gettext"
 
   def install

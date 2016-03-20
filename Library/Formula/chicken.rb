@@ -11,6 +11,7 @@ class Chicken < Formula
     sha256 "199e04ed0a8a62c936ed24c3c044f4c0a14c7f9e356501b936223a8ef10da6bf" => :el_capitan
     sha256 "fb5d63369b19db771c3620ae5aa584b110fb3f40df5cdd3760d9070878043e6d" => :yosemite
     sha256 "2f3a6ea745ffae4ab324c0740808d69b90e985e58946a0dfcf6bb4d44621342f" => :mavericks
+    sha256 "e28441909fb79975fa82dcc7c0621e0b917785e5a01a10ad5a8a5b72d8c14834" => :x86_64_linux
   end
 
   def install

@@ -6,6 +6,12 @@ class Sysstat < Formula
   head "https://github.com/sysstat/sysstat.git"
   # tag "linuxbrew"
 
+  bottle do
+    prefix "/home/linuxbrew/.linuxbrew"
+    cellar "/home/linuxbrew/.linuxbrew/Cellar"
+    sha256 "aa0c7d446f27601f9fc2201bcebfb202c9249b72e74a1a13d593973aeff51c45" => :x86_64_linux
+  end
+
   def install
     system "./configure",
       "--disable-file-attr", # Fix install: cannot change ownership

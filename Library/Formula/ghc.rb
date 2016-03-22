@@ -15,6 +15,7 @@ class Ghc < Formula
   deprecated_option "with-tests" => "with-test"
 
   depends_on "gmp" => :build if OS.linux?
+  depends_on "homebrew/dupes/m4" => :build unless OS.mac?
 
   resource "gmp" do
     url "http://ftpmirror.gnu.org/gmp/gmp-6.1.0.tar.bz2"

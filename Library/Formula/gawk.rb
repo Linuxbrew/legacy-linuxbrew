@@ -10,6 +10,7 @@ class Gawk < Formula
     sha256 "c6fd269bedf83b9016fb8e09186de1c88ce18f51b1ad471f4b5ad4262066dda2" => :yosemite
     sha256 "30486a1665295a3fee02e22465869cec9297aec262554a470bbc7f127d1766e5" => :mavericks
     sha256 "d9edeb691699655ff990e2227abf67568916640eeffbbca959dbf3b2779c371e" => :mountain_lion
+    sha256 "11b2b6d50d442471a087d43a1bfb3356e9d299c7eb776c2f571940d3c02eb73f" => :x86_64_linux
   end
 
   fails_with :llvm do

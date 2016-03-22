@@ -32,6 +32,7 @@ class Gtkx < Formula
   depends_on "pango"
   depends_on "gobject-introspection"
   depends_on "hicolor-icon-theme"
+  depends_on "cairo" => "with-x11" unless OS.mac?
 
   fails_with :llvm do
     build 2326

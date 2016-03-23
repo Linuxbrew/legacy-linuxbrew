@@ -14,8 +14,11 @@ class Ghc < Formula
   deprecated_option "tests" => "with-test"
   deprecated_option "with-tests" => "with-test"
 
-  depends_on "gmp" => :build if OS.linux?
   depends_on "homebrew/dupes/m4" => :build unless OS.mac?
+
+  # These two dependencies are needed for the bootstrap executables.
+  depends_on "gmp" => :build if OS.linux?
+  depends_on "homebrew/dupes/ncurses" => :build if OS.linux?
 
   resource "gmp" do
     url "http://ftpmirror.gnu.org/gmp/gmp-6.1.0.tar.bz2"
@@ -90,6 +93,10 @@ class Ghc < Formula
       ENV.prepend_path "LD_LIBRARY_PATH", gmp/"lib"
       # Fix /usr/bin/ld: cannot find -lgmp
       ENV.prepend_path "LIBRARY_PATH", gmp/"lib"
+      # Fix ghc-stage2: error while loading shared libraries: libncursesw.so.5
+      ln_s Formula["ncurses"].lib/"libncursesw.so", gmp/"lib/libncursesw.so.5"
+      # Fix ghc-pkg: error while loading shared libraries: libncursesw.so.6
+      ENV.prepend_path "LD_LIBRARY_PATH", Formula["ncurses"].lib
     end
 
     resource("binary").stage do

@@ -3,16 +3,16 @@ require "language/go"
 class Mailhog < Formula
   desc "Web and API based SMTP testing tool"
   homepage "https://github.com/mailhog/MailHog"
-  url "https://github.com/mailhog/MailHog/archive/0.1.9.tar.gz"
-  sha256 "2128208e5dbf25a812c31d745f3f40d32020304081fa4e811403b75b61bc828e"
+  url "https://github.com/mailhog/MailHog/archive/v0.2.0.tar.gz"
+  sha256 "e7aebdc9295aa3a4a15198b921e76ec9b1a490d2f3e67d4670b94d816d070f37"
 
   head "https://github.com/mailhog/MailHog.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "3208a18a978fbc71f0e9026137f5722cee8a04451706eb8180912db4cf9c4d17" => :el_capitan
-    sha256 "4a2a8e9aa596f7bff49734c40c0a57438fda83731e2b57d7d27a0c50cf5095b4" => :yosemite
-    sha256 "6baecc0a1f5e3d7589d6555795a1d1f4b26611a38949cdce2c4ac3cab4b87c57" => :mavericks
+    sha256 "29ecb43871179f654a34de212d0d91fee1f429ad166a1cfd247292d3b1b1cc3d" => :el_capitan
+    sha256 "8e2d50b96d41c17ecf2b3f82469e9cc09d46d1022ac657a7ade32fd7d92d5116" => :yosemite
+    sha256 "7966918bcc33de8e4e9d08d4e5c96fb482f43b1f4c53199f00a5f88633e2e7ed" => :mavericks
   end
 
   depends_on "go" => :build

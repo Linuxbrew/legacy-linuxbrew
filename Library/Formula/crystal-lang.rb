@@ -1,14 +1,14 @@
 class CrystalLang < Formula
   desc "Fast and statically typed, compiled language with Ruby-like syntax"
   homepage "http://crystal-lang.org/"
-  url "https://github.com/crystal-lang/crystal/archive/0.13.0.tar.gz"
-  sha256 "abada1d7bd411dca52ac0df2124a188d61301bdcd1fc75e8419a24496ee8ff42"
+  url "https://github.com/crystal-lang/crystal/archive/0.14.2.tar.gz"
+  sha256 "0fdbb8c0ebbc1da0024b19fac193763654b474e3e2db957a4543bfc5ad5dba67"
   head "https://github.com/manastech/crystal.git"
 
   bottle do
-    sha256 "5c804b37df14fa4b4b93fb77be35f5f61a00610108095b3dbf37130bd1da3f22" => :el_capitan
-    sha256 "7e070984b439e4030afad28d42bd22b4842495e0def892eeeb87b724a24a3afe" => :yosemite
-    sha256 "aba8ac58c5f8c5afac22f579d33c006b6319967e3923c7fdce5c26d3ee5e40e0" => :mavericks
+    sha256 "c6791c15e931c8c4894af36dfdd6689ff63a94677d0828772d5473443c62951d" => :el_capitan
+    sha256 "25bc1c73b8a0fc24d66b66ceeab8a0a3a8674ea55fa3f94b9c54b212e17a2b42" => :yosemite
+    sha256 "dac7f07a399532b349acf99095e51647c70754e9ef2565d3aed4465e1dd95008" => :mavericks
   end
 
   option "without-release", "Do not build the compiler in release mode"
@@ -20,9 +20,9 @@ class CrystalLang < Formula
   depends_on "libyaml" if build.with?("shards")
 
   resource "boot" do
-    url "https://github.com/crystal-lang/crystal/releases/download/0.12.0/crystal-0.12.0-1-darwin-x86_64.tar.gz"
-    version "0.12.0"
-    sha256 "2481282c037d9b209ec44a98a01895c26c1f5eee33ad364d68bc15b834f63446"
+    url "https://github.com/crystal-lang/crystal/releases/download/0.13.0/crystal-0.13.0-1-darwin-x86_64.tar.gz"
+    version "0.13.0"
+    sha256 "06a9485240387ae145e6cad07889cd40a632b0f2a13aa33470b21f59e76a0680"
   end
 
   resource "shards" do
@@ -47,7 +47,7 @@ class CrystalLang < Formula
     else
       system "make", "deps"
       (buildpath/".build").mkpath
-      system "bin/crystal", "build", "-o", ".build/crystal", "src/compiler/crystal.cr"
+      system "bin/crystal", "build", "-o", "-D", "without_openssl", "-D", "without_zlib", ".build/crystal", "src/compiler/crystal.cr"
     end
 
     if build.with? "shards"

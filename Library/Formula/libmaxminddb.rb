@@ -1,14 +1,14 @@
 class Libmaxminddb < Formula
   desc "C library for the MaxMind DB file format"
   homepage "https://github.com/maxmind/libmaxminddb"
-  url "https://github.com/maxmind/libmaxminddb/releases/download/1.1.4/libmaxminddb-1.1.4.tar.gz"
-  sha256 "fb618d22f9dd3494faf860e82e75e4e1f4cc14410a01118feb7bb7c31ea089a4"
+  url "https://github.com/maxmind/libmaxminddb/releases/download/1.1.5/libmaxminddb-1.1.5.tar.gz"
+  sha256 "655397037a70a08b276500f67c0f95f315f1a84809d6a5742593eb2720717d8a"
 
   bottle do
     cellar :any
-    sha256 "27dc75aea9488cc109f8e67b7c1ee8835b103c19ad9605315e93df38613cd6db" => :el_capitan
-    sha256 "f3efd2c1aac7c9aaac0b0e2214a97fa5ed596d909a7121550a9faeca30074b18" => :yosemite
-    sha256 "b63e0fc568a48f88a55ec33ea11710eeea71696ed2dd5d6bc46050edf48689c8" => :mavericks
+    sha256 "a05eec1703d5d58cae7455ae397fc3d2fa3514e27b32aa3f4bf8d195d99390ff" => :el_capitan
+    sha256 "6b85890ea8726bd53c5a574a4d883eddb3fc8c9cddcad41b54a126ef94d87050" => :yosemite
+    sha256 "49841b6972f85c952a7e26ea144d4a2cf28390524a59c6e42140834e46edd7fc" => :mavericks
   end
 
   head do

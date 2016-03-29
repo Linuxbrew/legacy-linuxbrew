@@ -10,6 +10,7 @@ class Texinfo < Formula
     sha256 "9157162006baab3069abb5d61241712f059a97c3752c1d1663e66d61062b18a5" => :el_capitan
     sha256 "9f611165b36ae3aac1b5c7a965de48659c41e53209e00a80649560414c861667" => :yosemite
     sha256 "d6031029c35ef99b7d3ef9d43daf993d6897bf73dd81cf2f53f5a6d1d38d7d73" => :mavericks
+    sha256 "15a3dbde9388c64b19cd013bd53888a6b18f132b4b51c7c83f98ac41de4b319c" => :x86_64_linux
   end
 
   keg_only :provided_by_osx, <<-EOS.undent

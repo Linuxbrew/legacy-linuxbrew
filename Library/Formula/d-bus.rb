@@ -12,6 +12,7 @@ class DBus < Formula
     sha256 "93ff1512d2ee0dfbf25e77822165c2a62439af86d63cd3811d325bc43195445b" => :el_capitan
     sha256 "54729cfbe8f3f889012aa4cdd8565979c80ad6c8cc896cdbfe15b842e196f9b1" => :yosemite
     sha256 "e50f1ade0a5871d9c0441fb129e74f45166e928d32fbf50972ada039917155a6" => :mavericks
+    sha256 "0a7fe65fd37c4d3955b121e1c5f06e2e9eba5b05d0a8b841a1e2acf564ccb4c9" => :x86_64_linux
   end
 
   # Patch applies the config templating fixed in https://bugs.freedesktop.org/show_bug.cgi?id=94494

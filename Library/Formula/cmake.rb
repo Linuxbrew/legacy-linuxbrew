@@ -10,6 +10,7 @@ class Cmake < Formula
     sha256 "be1164384380a996c9233fffdaf919c93a0e5bccb1c04e26bb3ba449067abc05" => :el_capitan
     sha256 "fe2f9efc496738dd3da3baa22e8e75ea629fd5e4fb3c891117b866592547dc6f" => :yosemite
     sha256 "2cfe0cca180054794fff3818c2bcba49900eed68e4dd7ce0b79ac5b915e2cf7b" => :mavericks
+    sha256 "04b6c1489a02cfed4a7f2f2f8b41fa5257251db7b75a5699c48322e481adb9fc" => :x86_64_linux
   end
 
   option "without-docs", "Don't build man pages"

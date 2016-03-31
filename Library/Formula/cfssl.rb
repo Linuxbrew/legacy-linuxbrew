@@ -3,15 +3,15 @@ require "language/go"
 class Cfssl < Formula
   desc "CloudFlare's PKI toolkit"
   homepage "https://cfssl.org/"
-  url "https://github.com/cloudflare/cfssl/archive/1.1.0.tar.gz"
-  sha256 "589222d922aa4ebae2039a54c46b9a7c2df4c95d78026ab35768a6cf62836ca9"
+  url "https://github.com/cloudflare/cfssl/archive/1.2.0.tar.gz"
+  sha256 "30301696fa7ab59aca0cf7883ee82b9b42e0e7c0022269f51454b476a9a2edf9"
   head "https://github.com/cloudflare/cfssl.git"
 
   bottle do
-    cellar :any
-    sha256 "1c28f3caabe350a72649f2cb4ebefe53cd28888ea3385a44253ed44e0165a03d" => :el_capitan
-    sha256 "a3ad35a05b855341a92ff410d63cfd1dc275f613ad31243d4062f0d3365e11c3" => :yosemite
-    sha256 "a5f1d86658b3c0927bbecd0c4aed184f0285c1a638762113aa70f4a2053c163e" => :mavericks
+    cellar :any_skip_relocation
+    sha256 "eaf7ab4cb575473fe5a9bee2f5fe28d8fa0fa1721ecf6a29c8c0bcd7af5a5fb8" => :el_capitan
+    sha256 "828599bcc735eb04e77e3a8400f3e1aa41035de41f33a84d65da0dd76b0fe073" => :yosemite
+    sha256 "5ad2bb997d85b6b6863e130f32142bf5674ac19169136b62d0109b71e8c46694" => :mavericks
   end
 
   depends_on "go" => :build

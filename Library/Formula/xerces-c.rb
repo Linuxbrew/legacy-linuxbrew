@@ -9,6 +9,7 @@ class XercesC < Formula
     sha256 "09c3aa649e5dd5833c5114f164ee2f508f140a22bf6e3b5c74741be9f51eba00" => :el_capitan
     sha256 "d1b2e0e9c6715e1ec7407b0e6b6b68fe095b73576cc3b6dfa731bcdd9e3f2169" => :yosemite
     sha256 "515d56bed90b80580312a37aecd838ace36914e8c7b9306ee714cd8b34ef8428" => :mavericks
+    sha256 "f89dcbd825a84b0b572aeb858f540d288411997722676acf84767e12cf026311" => :x86_64_linux
   end
 
   option :universal

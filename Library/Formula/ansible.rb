@@ -11,6 +11,7 @@ class Ansible < Formula
     sha256 "457a6bcbe29bde7543544dbd44d702e9d6ee51135dc59687cd923f8737a3d31d" => :el_capitan
     sha256 "339d9bc27942b45d7322f6960422718523a92dbd167869bb3f5cb80d54075369" => :yosemite
     sha256 "d0684bc344e8bfee3ecdc79316c24b57cf06c1417cc84a79643c10d81ea74d96" => :mavericks
+    sha256 "e2be3e2a3f6033f0ef2d4feddc674f30997e5bc78a265ea3fff315d43d0654b8" => :x86_64_linux
   end
 
   devel do

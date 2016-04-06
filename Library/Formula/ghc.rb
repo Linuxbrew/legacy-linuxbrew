@@ -8,7 +8,6 @@ class Ghc < Formula
     sha256 "72c6c729ea385aaebfa22b55fe31b85f46e423a510c83d2f76c8f57336f9bf2c" => :el_capitan
     sha256 "3914b0875845c0e419c440c1b5833631ea709e6e8d5d9bf546422852c4c96ea8" => :yosemite
     sha256 "3ca8542ed077871a9da2e7af1a2362eb6ddc52501e6625fa5b06e9fda288e980" => :mavericks
-    sha256 "81fe9bd3a6caec256a36c5447abc79bfb52a153073e19528bab56a39da43554b" => :x86_64_linux
   end
 
   option "with-test", "Verify the build using the testsuite"

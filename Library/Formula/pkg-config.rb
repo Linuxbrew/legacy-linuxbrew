@@ -9,6 +9,7 @@ class PkgConfig < Formula
     sha256 "6bf11398f37f686faf47bf5fa96138423950428cd08316d9f0edcce6cda53561" => :el_capitan
     sha256 "8b908a88bf6a073824861647a074244fa24997f502ba3ac6a55411e05b54e736" => :yosemite
     sha256 "a27ddccd93c19c3e492c6dba674140340b9ac18253066b5a91933d7ca4dd0992" => :mavericks
+    sha256 "b7dbe2b71eef91148bbccc87237c51279656d821e86350b16ceeb4a04bf0ef6e" => :x86_64_linux
   end
 
   def install

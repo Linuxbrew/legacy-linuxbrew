@@ -9,6 +9,7 @@ class Cppcheck < Formula
     sha256 "95395daf0154293fba7b6254c278a128aad26fc3c9f0a73ac02200be7329eb60" => :el_capitan
     sha256 "ea7ca38db3bb2e08a9cffd9f003df61d865dad098a140dbec5d5458f085be9d5" => :yosemite
     sha256 "0e46747db20c2cb9fe2a505901db7f70be154a4326da528740e8cb1e3c1281a3" => :mavericks
+    sha256 "7d0c7e1833b974de15d92ff0f66d05e9d70ee6a6c8ccc24e0cd1017b4177829e" => :x86_64_linux
   end
 
   option "without-rules", "Build without rules (no pcre dependency)"

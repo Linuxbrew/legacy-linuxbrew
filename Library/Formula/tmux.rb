@@ -27,6 +27,7 @@ class Tmux < Formula
     sha256 "815920cd38a8102360f7d667271d9c724f41087dd79be433db29259390ef8011" => :el_capitan
     sha256 "93e2156c3c7e1c9f3f4b86dd84617e7519e9bee630f1e8769e00a91aa341d274" => :yosemite
     sha256 "03c4ca001f72a1623393c0ec9406dfd82b7e449d745762a6e761da6a95d0fbd9" => :mavericks
+    sha256 "769f97fb0bcfcb083d7488c453b5a1007bbc6ed5e7cf8a9634d9dc1b4b5cd048" => :x86_64_linux
   end
 
   head do

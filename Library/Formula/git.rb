@@ -10,6 +10,7 @@ class Git < Formula
     sha256 "b6c7dced784d24490c6cdf1de30a78c36c77ae2d8605e958c5431c54efe11322" => :el_capitan
     sha256 "ab7602fff0b627697ba9ed17deec61559de5fc19d47cf929bdc551099eb58096" => :yosemite
     sha256 "dbd4997ec46627ea62bcf1f3a8820c2c84f4f9ef8d314747aeb50ae4f7fac2a4" => :mavericks
+    sha256 "7c8dd788b54df9a065ef52ee4dd742696fc350126942a7aab3791ef35f1e3885" => :x86_64_linux
   end
 
   resource "man" do

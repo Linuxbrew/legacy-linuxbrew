@@ -5,6 +5,11 @@ class Libgpm < Formula
   sha256 "f011b7dc7afb824e0a017b89b7300514e772853ece7fc4ee640310889411a48d"
   # tag "linuxbrew"
 
+  bottle do
+    cellar :any
+    sha256 "7aec47e93bf034b08d3376ce35e75c87e0dd4995917f5f0727b0297189e02af8" => :x86_64_linux
+  end
+
   head "https://github.com/telmich/gpm.git"
 
   depends_on "autoconf" => :build

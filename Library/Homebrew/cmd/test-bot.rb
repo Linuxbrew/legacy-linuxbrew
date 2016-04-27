@@ -11,6 +11,8 @@
 # --junit:         Generate a JUnit XML test results file.
 # --no-bottle:     Run brew install without --build-bottle
 # --keep-old:      Run brew bottle --keep-old to build new bottles for a single platform.
+# --legacy         Bulid formula from legacy Homebrew/homebrew repo.
+#                  (TODO remove it when it's not longer necessary)
 # --HEAD:          Run brew install with --HEAD
 # --local:         Ask Homebrew to write verbose logs under ./logs/ and set HOME to ./home/
 # --tap=<tap>:     Use the git repository of the given tap
@@ -338,7 +340,11 @@ module Homebrew
         # the right commit to BrewTestBot.
         unless travis_pr
           diff_start_sha1 = current_sha1
-          test "brew", "pull", "--clean", @url
+          if ARGV.include?("--legacy")
+            test "brew", "pull", "--clean", "--legacy", @url
+          else
+            test "brew", "pull", "--clean", @url
+          end
           diff_end_sha1 = current_sha1
         end
         @short_url = @url.gsub("https://github.com/", "")
@@ -647,8 +653,15 @@ module Homebrew
       git "rebase", "--abort"
       git "reset", "--hard"
       git "checkout", "-f", "master"
-      git "clean", "-ffdx" unless ENV["HOMEBREW_RUBY"] == "1.8.7"
-      pr_locks = "#{HOMEBREW_REPOSITORY}/.git/refs/remotes/*/pr/*/*.lock"
+      git "clean", "-ffdx"
+      HOMEBREW_REPOSITORY.cd do
+        safe_system "git", "reset", "--hard"
+        safe_system "git", "checkout", "-f", "master"
+        # This will uninstall all formulae, as long as
+        # HOMEBREW_REPOSITORY == HOMEBREW_PREFIX, which is true on the test bots
+        safe_system "git", "clean", "-ffdx", "--exclude=/Library/Taps/" unless ENV["HOMEBREW_RUBY"] == "1.8.7"
+      end
+      pr_locks = "#{@repository}/.git/refs/remotes/*/pr/*/*.lock"
       Dir.glob(pr_locks) { |lock| FileUtils.rm_rf lock }
     end
 
@@ -668,6 +681,10 @@ module Homebrew
         test "brew", "cleanup", "--prune=7"
         git "gc", "--auto"
         test "git", "clean", "-ffdx"
+        HOMEBREW_REPOSITORY.cd do
+          safe_system "git", "reset", "--hard"
+          safe_system "git", "clean", "-ffdx", "--exclude=/Library/Taps/"
+        end
         if ARGV.include? "--local"
           FileUtils.rm_rf ENV["HOMEBREW_HOME"]
           FileUtils.rm_rf ENV["HOMEBREW_LOGS"]
@@ -773,6 +790,7 @@ module Homebrew
 
     ARGV << "--verbose"
     ARGV << "--keep-old" if ENV["UPSTREAM_BOTTLE_KEEP_OLD"]
+    ARGV << "--legacy" if ENV["UPSTREAM_BOTTLE_LEGACY"]
 
     if jenkins
       bottles = Dir["#{jenkins}/jobs/#{job}/configurations/axis-version/*/builds/#{id}/archive/*.bottle*.*"]
@@ -802,12 +820,13 @@ module Homebrew
     safe_system "brew", "update"
 
     if pr
-      pull_pr = if tap.core_tap?
-        pr
+      if ARGV.include?("--legacy")
+        pull_pr = "https://github.com/Homebrew/homebrew/pull/#{pr}"
+        safe_system "brew", "pull", "--clean", "--legacy", pull_pr
       else
-        "https://github.com/#{tap.user}/homebrew-#{tap.repo}/pull/#{pr}"
+        pull_pr = "https://github.com/#{tap.user}/homebrew-#{tap.repo}/pull/#{pr}"
+        safe_system "brew", "pull", "--clean", pull_pr
       end
-      safe_system "brew", "pull", "--clean", pull_pr
     elsif docker_sha1
       url = if tap.core_tap?
         "https://github.com/#{docker_user}/linuxbrew/commit/#{docker_sha1}"
@@ -823,7 +842,7 @@ module Homebrew
 
     project = OS.mac? ? "homebrew" : "linuxbrew"
     remote_repo = tap.core_tap? ? project : "homebrew-#{tap.repo}"
-    remote = docker_branch ? "testbot" : "git@github.com:#{ENV["GIT_AUTHOR_NAME"]}/#{remote_repo}.git"
+    remote = "git@github.com:#{ENV["GIT_AUTHOR_NAME"]}/#{remote_repo}.git"
     tag = docker_branch ? "pr-#{docker_user}-#{docker_branch}" : pr ? "pr-#{pr}" : "testing-#{number}"
     safe_system "git", "push", "--force", remote, "master:master", ":refs/tags/#{tag}"
 
@@ -912,9 +931,17 @@ module Homebrew
     p ARGV
 
     tap = resolve_test_tap
-    # Tap repository if required, this is done before everything else
-    # because Formula parsing and/or git commit hash lookup depends on it.
-    safe_system "brew", "tap", tap.name unless tap.installed?
+    if tap.installed?
+      # make sure Tap is not a shallow clone.
+      # bottle revision and bottle upload rely on full clone.
+      if (tap.path/".git/shallow").exist?
+        safe_system "git", "-C", tap.path, "fetch", "--unshallow"
+      end
+    else
+      # Tap repository if required, this is done before everything else
+      # because Formula parsing and/or git commit hash lookup depends on it.
+      safe_system "brew", "tap", tap.name, "--full"
+    end
 
     if ARGV.include? "--ci-upload"
       return test_ci_upload(tap)
